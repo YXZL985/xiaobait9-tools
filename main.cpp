@@ -131,9 +131,11 @@ int main(int argc, char *argv[])
                 &w, [&, extractProcess, tempFile](int exitCode, QProcess::ExitStatus exitStatus) {
             if (exitCode == 0 && exitStatus == QProcess::NormalExit) {
                 // 解压成功后，执行编辑default.yaml文件的操作
-                QString command = "sed -i '/schema_list:/a\\  - schema: xiaobai_simp' /usr/share/rime-data/default.yaml";
+                QString command1 = "sed -i '/schema_list:/a\\  - schema: xiaobai_simp' /usr/share/rime-data/default.yaml";
+                QString command2 = "sed -i '/  - schema: xiaobai_simp/a\\  - schema: xiaobai_tw' /usr/share/rime-data/default.yaml";
+                QString fullCommand = command1 + " && " + "echo \"已添加简体拼音方案\" && " + command2 + " && " + "echo \"已添加繁体拼音方案\"";
                 QStringList terminalArgs;
-                terminalArgs << "-e" << "pkexec" << "bash" << "-c" << command;
+                terminalArgs << "-e" << "pkexec" << "bash" << "-c" << fullCommand;
                 QProcess::startDetached("deepin-terminal", terminalArgs);
                 
                 QMessageBox::information(&w, "成功", "输入法方案已成功安装/更新！");
