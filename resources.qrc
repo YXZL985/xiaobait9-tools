@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/logo.svg</file>
+        <file>schema/xiaobai_schema.tar.gz</file>
+        <file>translations/xiaobait9-tools_zh_CN.qm</file>
+    </qresource>
+</RCC>
