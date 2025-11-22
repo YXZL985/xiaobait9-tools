@@ -152,6 +152,14 @@ int main(int argc, char *argv[])
         extractProcess->start("tar", arguments);
     });
     
+    // 连接重新部署输入法引擎按钮的信号槽
+    // 连接重新部署输入法引擎按钮的信号槽
+    QObject::connect(button3, &QPushButton::clicked, [&]() {
+        QStringList args;
+        args << "-e" << "bash" << "-c" << "fcitx5-remote -r; echo '输入法引擎已重新部署完成!'; read -p '按任意键继续...' key";
+        QProcess::startDetached("deepin-terminal", args);
+    });
+    
     w.show();
     return a.exec();
     
